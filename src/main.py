@@ -1,9 +1,9 @@
 """
-The main driver for AoC 2024. Run this from the src directory
+The main driver for AoC 2025. Run this from the src directory
 """
 
 try:
-    from classes.d_1 import D1
+    from classes.d_2 import D2
 except ModuleNotFoundError:
     print("[!] Could not find modules!")
 
@@ -11,9 +11,9 @@ def main():
     """
     Generates a solution for a day's puzzles
     """
-    d1 = D1("../input/d1.txt", debug=True)
-    print(d1.one())
-    print(d1.two())
+    d2 = D2("../input/d2.txt", debug=True)
+    print(d2.one())
+    # print(d1.two())
 
 
 if __name__ == '__main__':
