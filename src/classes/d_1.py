@@ -12,6 +12,7 @@ class D1(Day):
     """
     Class containing the solution to Day 1
     """
+
     def __init__(self, input_file, debug=False):
         super().__init__(input_file, debug=debug)
         self.dial_number = 50
@@ -19,7 +20,6 @@ class D1(Day):
         self.passed_by_zero = 0
         self.dial_min = 0
         self.dial_max = 99
-
 
     def parse_instruction(self, line):
         """
@@ -31,13 +31,12 @@ class D1(Day):
         clicks = int(line[1:])
         return (direction, clicks)
 
-    
     def turn_dial_left(self, clicks):
         """
         Turn the dial to the left some number of clicks. If the dial crosses
-        zero, set the dial_number to dial_max and increment self.passed_by_zero 
+        zero, set the dial_number to dial_max and increment self.passed_by_zero
         """
-        starting_on_zero = (self.dial_number == 0)
+        starting_on_zero = self.dial_number == 0
         if self.debug:
             print(f"Dial starting position: {self.dial_number}")
         while clicks > 0:
@@ -52,13 +51,12 @@ class D1(Day):
                 self.dial_number = self.dial_max
         return
 
-
     def turn_dial_right(self, clicks):
         """
         Turn the dial to the right some number of clicks. If the dial crosses
-        dial_max, set the dial_number to dial_min 
+        dial_max, set the dial_number to dial_min
         """
-        starting_on_zero = (self.dial_number == 0)
+        starting_on_zero = self.dial_number == 0
         if self.debug:
             print(f"Dial starting position: {self.dial_number}")
         while clicks > 0:
@@ -72,7 +70,6 @@ class D1(Day):
                 starting_on_zero = False
                 self.dial_number = self.dial_min
         return
-
 
     def solve(self):
         self.dial_number = 50
@@ -95,7 +92,6 @@ class D1(Day):
                 print(f"Dial ending position: {self.dial_number}")
                 print(f"Landed on Zeroes: {self.number_of_zeroes}\n")
 
-
     def one(self):
         """
         Given a safe dial with numbers 0-99, starting on 50, make a series of
@@ -104,7 +100,6 @@ class D1(Day):
         """
         self.solve()
         print(f"Landed on Zeroes: {self.number_of_zeroes}\n")
-
 
     def two(self):
         """
@@ -115,5 +110,6 @@ class D1(Day):
         self.solve()
         print(f"Touched Zero: {self.number_of_zeroes + self.passed_by_zero}\n")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print("[!] This is just a class definition!")

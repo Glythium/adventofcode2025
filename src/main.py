@@ -7,14 +7,15 @@ try:
 except ModuleNotFoundError:
     print("[!] Could not find modules!")
 
+
 def main():
     """
     Generates a solution for a day's puzzles
     """
     d2 = D2("../input/d2.txt", debug=True)
-    print(d2.one())
-    # print(d1.two())
+    # print(d2.one())
+    print(d2.two())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

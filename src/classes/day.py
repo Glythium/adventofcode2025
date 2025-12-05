@@ -2,10 +2,12 @@
 File containing the abstract base class for each Day
 """
 
-class Day():
+
+class Day:
     """
     Abstract base class for each Day's solutions
     """
+
     def __init__(self, input_file, debug=False):
         self.debug = debug
         self.total = 0
@@ -36,5 +38,5 @@ class Day():
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("[!] This is just the abstract base class!")
