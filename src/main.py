@@ -12,8 +12,8 @@ def main():
     Generates a solution for a day's puzzles
     """
     d1 = D1("../input/d1.txt", debug=True)
-    # print(d1.one())
-    # print(d1.two())
+    print(d1.one())
+    print(d1.two())
 
 
 if __name__ == '__main__':
