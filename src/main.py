@@ -3,7 +3,7 @@ The main driver for AoC 2025. Run this from the src directory
 """
 
 try:
-    from classes.d_2 import D2
+    from classes.d_3 import D3
 except ModuleNotFoundError:
     print("[!] Could not find modules!")
 
@@ -12,9 +12,9 @@ def main():
     """
     Generates a solution for a day's puzzles
     """
-    d2 = D2("../input/d2.txt", debug=True)
-    # print(d2.one())
-    print(d2.two())
+    d3 = D3("../input/d3.txt", debug=True)
+    print(d3.one())
+    # print(d3.two())
 
 
 if __name__ == "__main__":
