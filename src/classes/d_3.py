@@ -1,5 +1,5 @@
 """
-Class file containing the solution to Day One's puzzles
+Class file containing the solution to Day Three's puzzles
 """
 
 try:
@@ -15,12 +15,26 @@ class D3(Day):
 
     def __init__(self, input_file, debug=False):
         super().__init__(input_file, debug=debug)
+        self.maximum_total_joltage = 0
+
+    def determine_max_joltage(self, joltages):
+        """
+        Picks the highest joltage from a set of joltages
+
+        :param joltages: Set containing possible joltage values
+        """
+        max_joltage = 0
+        for joltage in joltages:
+            if joltage > max_joltage:
+                max_joltage = joltage
+        self.maximum_total_joltage += max_joltage
 
     def one(self):
         """
-        Find the maximum joltage provided by a bank of batteries
+        Selects highest joltage from a bank of batteries. The joltage
+        consists of two batteries in the bank.
         """
-        maximum_total_joltage = 0
+        self.maximum_total_joltage = 0
         for bank in self.input.splitlines():
             if self.debug:
                 print(f"Bank: {bank}")
@@ -36,20 +50,13 @@ class D3(Day):
                 right_index = left_index + 1
             if self.debug:
                 print(f"Joltages: {joltages}")
-            max = 0
-            for joltage in joltages:
-                if joltage > max:
-                    max = joltage
-            maximum_total_joltage += max
+            self.determine_max_joltage(joltages)
             if self.debug:
                 print(f"Max joltage: {max}")
-        print(f"Total Voltage: {maximum_total_joltage}")
-
+        print(f"Total Voltage: {self.maximum_total_joltage}")
 
     def two(self):
-        """
-        
-        """
+        """ """
         pass
 
 
