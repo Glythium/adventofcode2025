@@ -27,6 +27,8 @@ class D3(Day):
         for joltage in joltages:
             if joltage > max_joltage:
                 max_joltage = joltage
+        if self.debug:
+            print(f"Max joltage: {max_joltage}\n")
         self.maximum_total_joltage += max_joltage
 
     def one(self):
@@ -51,13 +53,51 @@ class D3(Day):
             if self.debug:
                 print(f"Joltages: {joltages}")
             self.determine_max_joltage(joltages)
-            if self.debug:
-                print(f"Max joltage: {max}")
         print(f"Total Voltage: {self.maximum_total_joltage}")
 
     def two(self):
-        """ """
-        pass
+        """
+        Selects highest joltage from a bank of batteries. The joltage
+        consists of twelve batteries in the bank.
+        """
+        self.maximum_total_joltage = 0
+        for bank in self.input.splitlines():
+            if self.debug:
+                print(f"Bank: {bank}")
+            # Empty string to build the 12-digit joltage
+            joltage = str()
+            # Maximum offset from the bank from which we can
+            # still build a 12-digit joltage
+            offset = 11
+            # While we have digits to append
+            while offset >= 0:
+                # Reset the highest number tracker
+                highest_num = 0
+                # Calculate how deep we can search the bank
+                max_start_index = len(bank) - offset
+                # Search through until the last feasible index
+                if self.debug:
+                    print(f"Offset: {offset} - Max Start Index: {max_start_index}")
+                    print(f"Searching through: {bank[:max_start_index]}")
+                for battery in bank[:max_start_index]:
+                    # If the battery joltage is higher
+                    if int(battery) > highest_num:
+                        # Then it becomes the highest number
+                        highest_num = int(battery)
+                # Calculate the new starting position
+                start_pos = bank.index(str(highest_num)) + 1
+                # Chop off the parts preceding parts of the bank
+                bank = bank[start_pos:]
+                if self.debug:
+                    print(f"Remaining Bank: {bank}")
+                # Append the highest joltage to the string
+                joltage += str(highest_num)
+                # Decrement the offset and move on
+                offset -= 1
+            if self.debug:
+                print(f"Joltage: {joltage}\n")
+            self.maximum_total_joltage += int(joltage)
+        print(f"Maximum total joltage: {self.maximum_total_joltage}")
 
 
 if __name__ == "__main__":
