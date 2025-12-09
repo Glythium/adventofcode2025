@@ -22,7 +22,7 @@ class D4(Day):
 
     def parse_grid(self):
         """
-        Create a two-dimensional array out of a given grid as input        
+        Create a two-dimensional array out of a given grid as input
         """
         for line in self.input.splitlines():
             characters = list()
@@ -38,7 +38,7 @@ class D4(Day):
         """
         Increments surrounding_rolls count if our target character is
         at a given x,y coordinate in the grid
-        
+
         :param x_coord: Index of the character within a line to check
         :param y_coord: Index of the line in within a grid to check
         """
@@ -51,7 +51,7 @@ class D4(Day):
         Given an x and y coordinate, increment the accessible_rolls
         count if there are less than 4 paper rolls in the eight
         possible surrounding positions
-        
+
         :param x_coord: Index of the character within a line to check
         :param y_coord: Index of the line in within a grid to check
         """
@@ -91,7 +91,7 @@ class D4(Day):
     def remove_rolls(self):
         """
         Sweep through the grid and remove rolls of paper "@". Replace
-        them with an "x" in the grid.       
+        them with an "x" in the grid.
         """
         self.removed_coords = list()
         for y_coord, line in enumerate(self.grid):
