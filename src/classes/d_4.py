@@ -18,7 +18,7 @@ class D4(Day):
         self.grid = list()
         self.accessible_rolls = 0
         self.surrounding_rolls = 0
-        self.debug_coords = list()
+        self.removed_coords = list()
 
     def parse_grid(self):
         """
@@ -86,8 +86,23 @@ class D4(Day):
                 self.is_target_character(x_coord + 1, y_coord + 1)
         if self.surrounding_rolls < 4:
             self.accessible_rolls += 1
-            if self.debug:
-                self.debug_coords.append([x_coord, y_coord])
+            self.removed_coords.append([x_coord, y_coord])
+
+    def remove_rolls(self):
+        """
+        Sweep through the grid and remove rolls of paper "@". Replace
+        them with an "x" in the grid.       
+        """
+        self.removed_coords = list()
+        for y_coord, line in enumerate(self.grid):
+            for x_coord, character in enumerate(line):
+                if character == "@":
+                    self.get_surrounding_nodes(x_coord, y_coord)
+        for removed_coord in self.removed_coords:
+            self.grid[removed_coord[1]][removed_coord[0]] = "x"
+        for line in self.grid:
+            print(f"{line}")
+        print()
 
     def one(self):
         """
@@ -95,22 +110,24 @@ class D4(Day):
         of paper in the eight adjacent positions surrounding them.
         """
         self.parse_grid()
-        for y_coord, line in enumerate(self.grid):
-            for x_coord, character in enumerate(line):
-                if character == "@":
-                    self.get_surrounding_nodes(x_coord, y_coord)
-        if self.debug:
-            for debug_coord in self.debug_coords:
-                self.grid[debug_coord[1]][debug_coord[0]] = "x"
-            for line in self.grid:
-                print(f"{line}")
+        self.remove_rolls()
         print(f"Accessible rolls: {self.accessible_rolls}")
 
     def two(self):
         """
-        
+        Count how many rolls of paper "@" have fewer than four rolls
+        of paper in the eight adjacent positions surrounding them.
+        Remove them and repeat this process until there are not more
+        accessible rools of paper.
         """
-        pass
+        self.parse_grid()
+        # Basically a do/while here
+        snapshot_removed_rolls = self.accessible_rolls
+        self.remove_rolls()
+        while snapshot_removed_rolls != self.accessible_rolls:
+            snapshot_removed_rolls = self.accessible_rolls
+            self.remove_rolls()
+        print(f"Accessible rolls: {self.accessible_rolls}")
 
 
 if __name__ == "__main__":
