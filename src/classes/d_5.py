@@ -32,9 +32,7 @@ class D5(Day):
                 continue
             if is_id_range:
                 low, high = line.split("-")
-                # Add one to the hig end because the ranges are meant
-                # to be inclusive
-                self.ingredient_id_ranges.append(range(int(low), int(high) + 1))
+                self.ingredient_id_ranges.append([int(low), int(high)])
             else:
                 self.ingredient_ids.append(int(line))
         if self.debug:
@@ -48,6 +46,10 @@ class D5(Day):
         """
         self.fresh_ingredients = 0
         self.parse_ingredient_db()
+        for idx, id_range in enumerate(self.ingredient_id_ranges):
+            # Add one to the high end because the ranges are meant
+            # to be inclusive
+            self.ingredient_id_ranges[idx] = range(id_range[0], id_range[1] + 1)
         for i in self.ingredient_ids:
             for id_range in self.ingredient_id_ranges:
                 if i in id_range:
