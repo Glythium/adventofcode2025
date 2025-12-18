@@ -12,6 +12,7 @@ class Day:
         self.debug = debug
         self.total = 0
         self.input = self.read_input(input_file)
+        self.matrix = list()
 
     def read_input(self, input_file):
         """
@@ -24,6 +25,25 @@ class Day:
             if self.debug:
                 print(f"[!] FileNotFound '{input_file}'")
             return None
+
+    def create_matrix(self):
+        """
+        Creates a two-dimensional array out of the input
+        """
+        matrix = []
+        for line in self.input.splitlines():
+            this_line = []
+            for character in line:
+                this_line.append(character)
+            matrix.append(this_line)
+        return matrix
+
+    def print_matrix(self):
+        """
+        Prints the matrix in its current state
+        """
+        for line in self.matrix:
+            print(line)
 
     def one(self):
         """
