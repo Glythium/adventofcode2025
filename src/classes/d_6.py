@@ -27,12 +27,12 @@ class D6(Day):
 
     def parse_math_problems(self):
         """
-        Parses the list of math problems and creates a list of 
+        Parses the list of math problems and creates a list of
         integers and an operator. Each element in the list looks like:
         [ 1, 2, 3, "+"]
         """
         for line in self.input.splitlines():
-            for idx,element in enumerate(line.split()):
+            for idx, element in enumerate(line.split()):
                 if element.isdigit():
                     element = int(element)
                 self.math_problems[idx].append(element)
@@ -65,8 +65,8 @@ class D6(Day):
         to the individual math problems
         """
         # Reverse the lines
-        lines = self.input.split('\n')
-        for i,line in enumerate(lines):
+        lines = self.input.split("\n")
+        for i, line in enumerate(lines):
             lines[i] = line[-1::-1]
         if self.debug:
             for line in lines:
@@ -80,14 +80,16 @@ class D6(Day):
             # Do not concern ourselves with the last line for now
             while y_coord < len(lines) - 1:
                 if self.debug:
-                    print(f"Idx: {x_coord,y_coord} == Char: '{lines[y_coord][x_coord]}'")
+                    print(
+                        f"Idx: {x_coord, y_coord} == Char: '{lines[y_coord][x_coord]}'"
+                    )
                 # Ignore all spaces
-                if lines[y_coord][x_coord] != ' ':
+                if lines[y_coord][x_coord] != " ":
                     self.math_problems[x_coord].append(lines[y_coord][x_coord])
                 # Go to the next line
                 y_coord += 1
         # Convert the strings to digits
-        for idx,column in enumerate(self.math_problems):
+        for idx, column in enumerate(self.math_problems):
             number = ""
             for character in column:
                 number += character
@@ -97,7 +99,7 @@ class D6(Day):
         # Insert the operator
         operators = lines[-1].split()
         for operator in operators:
-            for idx,number in enumerate(self.math_problems):
+            for idx, number in enumerate(self.math_problems):
                 if number == []:
                     self.math_problems[idx] = operator
                     break
@@ -107,7 +109,7 @@ class D6(Day):
         # Arrays are zero-indexed, thus the offset
         while start_idx < len(self.math_problems) - 1:
             # Create a lookahead cursor for the next operator
-            for end_idx,element in enumerate(self.math_problems):
+            for end_idx, element in enumerate(self.math_problems):
                 if element in ["+", "*"]:
                     # Not messing with setting the answer to the
                     # first index because we're moving that around
@@ -116,13 +118,15 @@ class D6(Day):
                     else:
                         answer = 0
                     if self.debug:
-                        print(f"Index: {start_idx,end_idx} < {len(self.math_problems)}")
+                        print(
+                            f"Index: {start_idx, end_idx} < {len(self.math_problems)}"
+                        )
                         print(f"Element: {element}")
                     # Play catch-up to the lookahead cursor
                     while start_idx < end_idx:
                         # Adding or multiplying numbers along the way
                         if isinstance(self.math_problems[start_idx], int):
-                            if element == '+':
+                            if element == "+":
                                 answer += self.math_problems[start_idx]
                             elif element == "*":
                                 answer *= self.math_problems[start_idx]

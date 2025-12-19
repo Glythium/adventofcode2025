@@ -13,8 +13,8 @@ def main():
     Generates a solution for a day's puzzles
     """
     d7 = D7("../input/d7.txt", debug=True)
-    print(d7.one())
-    # print(d7.two())
+    # print(d7.one())
+    print(d7.two())
 
 
 if __name__ == "__main__":

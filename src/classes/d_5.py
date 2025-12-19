@@ -71,8 +71,8 @@ class D5(Day):
             is_not_deduplicated = False
             if self.debug:
                 print(f"Processing ranges: {self.ingredient_id_ranges}")
-            for idx_one,id_range in enumerate(self.ingredient_id_ranges):
-                for idx_two,comp in enumerate(self.ingredient_id_ranges):
+            for idx_one, id_range in enumerate(self.ingredient_id_ranges):
+                for idx_two, comp in enumerate(self.ingredient_id_ranges):
                     # Don't compare the same ranges
                     if idx_one == idx_two:
                         continue
